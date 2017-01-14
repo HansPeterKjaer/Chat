@@ -1,3 +1,37 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<div ng-controller="ChatController">
+    <h2>Chat</h2>
+
+    <div class="register-form" ng-hide="name">
+        <form ng-submit="register(_name)">
+            <label>
+                Brugernavn:
+                <input ng-model="_name" />
+            </label>
+            <button type="submit">Log ind</button>
+        </form>
+    </div>
+
+    <div class="register-form" ng-show="name">
+        <p>Hej {{name}}</p>
+        <p>Skriv din besked her:</p>
+        <form method="post" ng-submit="submitMessage(_message)">
+            <label>
+                Besked:
+                <input name="MessageText" ng-model="_message" />
+            </label>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <div>
+        <ul>
+            <li ng-repeat="node in messages">
+                <i>{{node.chatUser.name}}<i>: {{node.messageBody}}
+            </li>
+        </ul>
+    </div>
+
+</div>
