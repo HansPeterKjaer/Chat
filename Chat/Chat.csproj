@@ -169,6 +169,7 @@
     <Compile Include="Controllers\API\ChatMessagesController.cs" />
     <Compile Include="Controllers\API\ChatUsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="DAL\ChatContext.cs" />
     <Compile Include="DAL\ChatInitializer.cs" />
     <Compile Include="Global.asax.cs">
@@ -222,6 +223,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Session\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

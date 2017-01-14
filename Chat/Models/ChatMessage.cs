@@ -14,6 +14,7 @@ namespace Chat.Models
         public int ID { get; set; }
         public int ChatUserID { get; set; }
         public string MessageBody { get; set; }
+
         public virtual ChatUser ChatUser { get; set; }
     }
 }

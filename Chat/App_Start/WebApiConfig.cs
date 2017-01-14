@@ -15,7 +15,6 @@ namespace Chat
 
             // Use camel case for JSON data.
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             config.Formatters.Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);
 
             // Web API routes

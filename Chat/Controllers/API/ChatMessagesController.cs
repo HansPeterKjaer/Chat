@@ -20,7 +20,7 @@ namespace Chat.Controllers.API
         // GET: api/ChatMessages
         public IQueryable<ChatMessage> GetMessages()
         {
-            return db.Messages;
+            return db.Messages.Include("ChatUser");
         }
 
         // POST: api/ChatMessages
