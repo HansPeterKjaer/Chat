@@ -1,37 +1,45 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-<div ng-controller="ChatController">
-    <h2>Chat</h2>
+<div class="row" ng-controller="ChatController">
+    <div class="col-xs-12">
+        <h2>Chat</h2>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="register-form ng-cloak" ng-hide="name">
+                    <form class="form-inline" ng-submit="register(_name)">
+                        <div class="form-group">
+                            <label for="input-name">Brugernavn:</label>
+                            <input id="input-name" class="form-control" type="text" name="name" ng-model="_name" />
+                        </div>
+                        <button class="btn btn-default" type="submit">Log ind</button>
+                    </form>
+                </div>
 
-    <div class="register-form" ng-hide="name">
-        <form ng-submit="register(_name)">
-            <label>
-                Brugernavn:
-                <input ng-model="_name" />
-            </label>
-            <button type="submit">Log ind</button>
-        </form>
+                <div class="message-form ng-cloak" ng-show="name">
+                    <p>Hej {{name}}</p>
+                    
+                    <form class="" ng-submit="submitMessage(_message)">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <label for="input-message">Skriv din besked her:</label>
+                                    <textarea id="input-message" class="form-control" name="MessageBody" ng-model="_message"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-default" type="submit">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="ng-cloak">
+            <ul class="chatlist">
+                <li ng-repeat="node in messages | orderBy:'-'">
+                    <span class="author">{{node.chatUser.name}}</span>: {{node.messageBody}}
+                </li>
+            </ul>
+        </div>
     </div>
-
-    <div class="register-form" ng-show="name">
-        <p>Hej {{name}}</p>
-        <p>Skriv din besked her:</p>
-        <form method="post" ng-submit="submitMessage(_message)">
-            <label>
-                Besked:
-                <input name="MessageText" ng-model="_message" />
-            </label>
-            <button type="submit">Send</button>
-        </form>
-    </div>
-
-    <div>
-        <ul>
-            <li ng-repeat="node in messages">
-                <i>{{node.chatUser.name}}</i>: {{node.messageBody}}
-            </li>
-        </ul>
-    </div>
-
-</div>
+        </div>

@@ -6,6 +6,7 @@ app.controller('ChatController', function ($scope, $http) {
     // SignalR setup:
     $scope.chatHub = null;
     $scope.chatHub = $.connection.chatHub; // init hub
+    $.connection.hub.logging = true; // only for development!
     $.connection.hub.start();
     $scope.chatHub.client.broadcastMessage = function (message) {
         message = JSON.parse(message);
@@ -30,8 +31,10 @@ app.controller('ChatController', function ($scope, $http) {
             method: 'GET',
             url: '/session/getUser'
         }).success(function (data, status) {
-            $scope.name = data.user.name;
-            $scope.id = data.user.id;
+            if (data.success) {
+                $scope.name = data.user.name;
+                $scope.id = data.user.id;
+            }
         });
     };
     $scope.checkSession();
@@ -60,7 +63,7 @@ app.controller('ChatController', function ($scope, $http) {
     $scope.submitMessage = function (msg) {
         $http({
             method: 'POST',
-            url: 'api/ChatMessages/',
+            url: '/api/ChatMessages',
             data: { 'ChatUserId': $scope.id, 'MessageBody': msg }
         }).success(function (data, status, headers, config) {
             //$scope.messages.push(data);
