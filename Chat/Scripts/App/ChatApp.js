@@ -3,6 +3,16 @@ app.controller('ChatController', function ($scope, $http) {
     $scope.name = null;
     $scope.messages = [];
 
+    // SignalR setup:
+    $scope.chatHub = null;
+    $scope.chatHub = $.connection.chatHub; // init hub
+    $.connection.hub.start();
+    $scope.chatHub.client.broadcastMessage = function (message) {
+        message = JSON.parse(message);
+        $scope.messages.push(message);
+        $scope.$apply();
+    };
+
     $scope.loadFeed = function () {
         $http({
             method: 'GET',
@@ -53,7 +63,8 @@ app.controller('ChatController', function ($scope, $http) {
             url: 'api/ChatMessages/',
             data: { 'ChatUserId': $scope.id, 'MessageBody': msg }
         }).success(function (data, status, headers, config) {
-            $scope.messages.push(data);
+            //$scope.messages.push(data);
+            $scope.chatHub.server.sendMessage(data);
         });
     };
 });
